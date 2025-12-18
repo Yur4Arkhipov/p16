@@ -13,8 +13,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-//            LazyColumnAnimation()
-            ClickCounter()
+            RemovableList()
         }
     }
 }

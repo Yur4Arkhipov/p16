@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlin.compareTo
 
 @Composable
 fun LazyColumnAnimation() {
@@ -62,28 +63,39 @@ fun LazyColumnAnimation() {
 
 
 @Composable
-fun ClickCounter(
+fun RemovableList(
     modifier: Modifier = Modifier
 ) {
-    var count by remember { mutableStateOf(0) }
+    var items by remember { mutableStateOf(listOf("Яблоко", "Банан", "Груша", "Апельсин")) }
+    val fruits = listOf("Киви", "Манго", "Ананас", "Вишня", "Слива")
+    var fruitIndex by remember { mutableStateOf(0) }
 
     Column(
-        modifier = modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        modifier = modifier.padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Text(
-            text = "Счётчик: $count",
-            fontSize = 24.sp,
-            modifier = Modifier.padding(vertical = 16.dp)
-        )
+        Button(
+            onClick = {
+                if (fruitIndex < fruits.size) {
+                    items = items + fruits[fruitIndex]
+                    fruitIndex++
+                }
+            },
+            enabled = fruitIndex < fruits.size
+        ) {
+            Text("Добавить фрукт")
+        }
 
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Button(onClick = { count++ }) {
-                Text("+")
-            }
-            Button(onClick = { count = 0 }) {
-                Text("Сброс")
+        items.forEach { item ->
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = item, fontSize = 18.sp)
+                Button(onClick = { items = items - item }) {
+                    Text("Удалить")
+                }
             }
         }
     }

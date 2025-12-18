@@ -8,7 +8,6 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         title = "Desktop App",
     ) {
-//        App()
-        ClickCounter()
+        RemovableList()
     }
 }
