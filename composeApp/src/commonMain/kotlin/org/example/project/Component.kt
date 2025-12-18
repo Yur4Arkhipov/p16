@@ -3,6 +3,8 @@ package org.example.project
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun LazyColumnAnimation() {
@@ -52,6 +55,35 @@ fun LazyColumnAnimation() {
                 onClick = { list = list.shuffled() }
             ) {
                 Text(text = "Перемешать")
+            }
+        }
+    }
+}
+
+
+@Composable
+fun ClickCounter(
+    modifier: Modifier = Modifier
+) {
+    var count by remember { mutableStateOf(0) }
+
+    Column(
+        modifier = modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "Счётчик: $count",
+            fontSize = 24.sp,
+            modifier = Modifier.padding(vertical = 16.dp)
+        )
+
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Button(onClick = { count++ }) {
+                Text("+")
+            }
+            Button(onClick = { count = 0 }) {
+                Text("Сброс")
             }
         }
     }
