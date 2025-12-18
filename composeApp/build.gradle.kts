@@ -10,6 +10,9 @@ plugins {
 }
 
 kotlin {
+
+    jvm()
+
     androidTarget {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
@@ -28,6 +31,9 @@ kotlin {
     }
     
     sourceSets {
+        jvmMain.dependencies {
+            implementation(compose.desktop.currentOs)
+        }
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
@@ -44,6 +50,19 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+    }
+}
+
+compose.desktop {
+    application {
+        mainClass = "org.example.project.MainKt"
+
+        nativeDistributions {
+
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Exe, TargetFormat.Deb)
+            packageName = "org.example.project"
+            packageVersion = "1.0.0"
         }
     }
 }
