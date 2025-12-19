@@ -78,11 +78,11 @@ fun InteractiveCardGallery() {
     var cards by remember {
         mutableStateOf(
             listOf(
-                CardData(1, "🌟 Космос", Color(0xFF1A237E)),
-                CardData(2, "🌊 Океан", Color(0xFF006064)),
-                CardData(3, "🌲 Лес", Color(0xFF1B5E20)),
-                CardData(4, "🔥 Огонь", Color(0xFFBF360C)),
-                CardData(5, "⚡ Молния", Color(0xFF4A148C))
+                CardData(1, "Космос", Color(0xFF1A237E)),
+                CardData(2, "Океан", Color(0xFF006064)),
+                CardData(3, "Лес", Color(0xFF1B5E20)),
+                CardData(4, "Огонь", Color(0xFFBF360C)),
+                CardData(5, "Молния", Color(0xFF4A148C))
             )
         )
     }
@@ -127,20 +127,20 @@ fun InteractiveCardGallery() {
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             Button(onClick = { cards = cards.shuffled() }) {
-                Text("🎲 Перемешать")
+                Text("Перемешать")
             }
             Button(onClick = {
                 if (cards.isNotEmpty()) {
                     cards = cards.dropLast(1)
                 }
             }) {
-                Text("💥 Удалить")
+                Text("Удалить")
             }
             Button(onClick = {
                 val newId = (cards.maxOfOrNull { it.id } ?: 0) + 1
-                cards = cards + CardData(newId, "✨ Новая #$newId", randomColor())
+                cards = cards + CardData(newId, "Новая #$newId", randomColor())
             }) {
-                Text("➕ Добавить")
+                Text("Добавить")
             }
         }
     }
